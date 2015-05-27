@@ -1,0 +1,50 @@
+1.First of all we installed ubuntu 14.04 on the 4 computers or nodes.(
+here computer specifications are 760MB RAM and 128 GB hard disk.)
+
+2.Then we install GlusterFs on the computers.here are the steps:-
+
+1) Install python-software-properties.
+
+	
+	sudo apt-get install python-software-properties
+
+
+2) Add the GlusterFS PPA.
+
+
+	sudo add-apt-repository ppa:gluster/glusterfs-3.5
+
+	sudo apt-get update
+
+
+3) Install glusterfs-server.
+
+
+	sudo apt-get install glusterfs-server
+
+
+4) Go to the first server and run the following command:
+
+
+	sudo gluster peer probe <ipaddress-2>
+
+	sudo gluster peer probe <ipaddress-3>
+
+This command will form a cluster. To know the status of the cluster, execute the following:
+
+
+	sudo gluster peer status
+
+The output should show that this server is connected to 2 peers.
+
+5) Now execute the same command from the second or third server.
+
+
+	sudo gluster peer status
+You will again see that there are 2 peers but instead of the hostname of the first server, it has registered its IP address. To fix this, run the following command from second or third server:
+	
+
+sudo gluster peer probe <hostname-1>
+
+Now on executing sudo gluster peer status, you will see hostname of the first server and not its IP address.
+
