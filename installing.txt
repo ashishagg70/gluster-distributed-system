@@ -41,10 +41,3 @@ The output should show that this server is connected to 2 peers.
 
 
 	sudo gluster peer status
-You will again see that there are 2 peers but instead of the hostname of the first server, it has registered its IP address. To fix this, run the following command from second or third server:
-	
-
-sudo gluster peer probe <hostname-1>
-
-Now on executing sudo gluster peer status, you will see hostname of the first server and not its IP address.
-
