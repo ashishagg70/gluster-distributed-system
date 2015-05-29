@@ -1,0 +1,74 @@
+To access all the servers by names other than their ip addresses do the following:
+
+Open the hosts file under root privileges:
+    sudo nano /etc/hosts
+You should see something that looks like this:
+
+    127.0.0.1       localhost gluster2
+
+    # The following lines are desirable for IPv6 capable hosts
+    ::1     ip6-localhost ip6-loopback
+    fe00::0 ip6-localnet
+    ff00::0 ip6-mcastprefix
+    ff02::1 ip6-allnodes
+    ff02::2 ip6-allrouters
+
+Below the local host definition, you should add each VPS's IP address followed by the long and short names you wish to use to reference it.
+
+It should look something like this when you are finished:
+
+    127.0.0.1       localhost hostname
+    first_ip gluster0.droplet.com gluster0
+    second_ip gluster1.droplet.com gluster1
+    third_ip gluster2.droplet.com gluster2
+    
+    # The following lines are desirable for IPv6 capable hosts
+    ::1     ip6-localhost ip6-loopback
+    fe00::0 ip6-localnet
+    ff00::0 ip6-mcastprefix
+    ff02::1 ip6-allnodes
+    ff02::2 ip6-allrouters
+
+The gluster0.droplet.com and gluster0 portions of the lines can be changed to whatever name you would like to use to access each droplet.
+
+This should be done on all machines.
+
+
+To create a storage volume do the following:
+
+    sudo gluster volume create volume_name replica num_of_servers transport tcp domain1.com:/path/to/data/directory domain2.com:/path/to/data/directory ... force
+
+This command will create a volume. It will store the data from this volume in directories on each host. If a directory does not exist it will be created.
+At this point, our volume is created, but inactive. We can start the volume and make it available for use by typing:
+
+    sudo gluster volume start volume1
+
+
+To install and configure the client components do the following:
+
+On your client machine type:
+    sudo apt-get install glusterfs-client
+
+We are going to mount our remote storage volume on our client computer. To do that create a directory in the /mnt directory:
+    sudo mkdir /mnt/storage_pool
+
+To mount the remote volume:
+    sudo mount -t glusterfs domain1.com:volume_name path_to_mount_point
+
+On the client machine if we add file in the storage_pool, the files will also be shown on the servers in the gluster directory.
+
+To get information about the gluster volume:
+    sudo gluster volume info
+
+
+To add a brick to an existing volume:
+
+On the first server in the cluster, probe the server to which you want to add the new brick using the following command:
+    sudo gluster peer probe HOSTNAME
+
+Run the following command
+    sudo gluster volume add-brick <volume> replica n <server ip or hostname>:<absolute path to where the brick data should be stored>
+Here n is the number of copies of the file that you want to create.
+
+To remove a brick use the following command:
+    sudo gluster volume remove-brick <volume> replica n <server ip or hostname>:< absolute path to where the brick data was stored.>
