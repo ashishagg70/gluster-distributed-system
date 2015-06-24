@@ -1,0 +1,7 @@
+A couple of things have to be done before using IOzone for distributed file systems.
+
+1) All the client machines should be connected through a passwordless ssh connection.
+
+2) IOzone uses rsh by default. So rsh needs to be changed to ssh.
+   This can be done by the following command.
+      export RSH=ssh
