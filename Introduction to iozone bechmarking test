@@ -1,0 +1,38 @@
+Performance testing for glusterfs is being done through IOzone benchmarking tool.
+
+The benchmark generates and measures a variety of file operations.
+Iozone has been ported to many machines and runs under many operating systems.
+Iozone is useful for determining a broad filesystem analysis of a vendor’s computer platform.
+The benchmark tests file I/O performance for the following operations:
+  Read, write, re-read, re-write, read backwards, read strided, fread, fwrite, random read/write,
+  pread/pwrite variants, aio_read, aio_write, mmap.
+  
+Definitions of the tests:
+1)Write:  This test measures the performance of writing a new file.
+
+2)Re-write: This test measures the performance of writing a file that already exists.
+
+3)Read: This test measures the performance of reading an existing file. 
+
+4)Re-Read: This test measures the performance of reading a file that was recently read.
+
+5)Random Read: This test measures the performance of reading a file with accesses being made to random locations within the file.
+
+6)Random Write: This test measures the performance of writing a file with accesses being made to random locations within the file.
+
+7)Random Mix: This test measures the performance of reading and writing a file with accesses being made to random locations within the file.
+
+8)Backwards Read: This test measures the performance of reading a file backwards.
+
+9)Record Rewrite: This test measures the performance of writing and re-writing a particular spot within a file.
+
+10)Strided Read:  This test measures the performance of reading a file with a strided access behavior.
+
+11)Fwrite: This test measures the performance of writing a file using the library function fwrite().
+
+12)Frewrite: This test measures the performance of writing a file using the library function fwrite().
+
+13)Fread: This test measures the performance of reading a file using the library function fread().
+
+14)Freread: This test is the same as fread above except that in this test the file that is being read was read in the recent past.
+
