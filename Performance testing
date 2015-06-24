@@ -23,3 +23,8 @@ In the above command:
 -+m:  Use multiple buffers.
 -b: Used to specify a filename that will be used for output of an Excel compatible file that contains the results.
 
+We run the command multiple times to check the impact of changes in file size, record size and the number of threads.
+
+The following file sizes are used: 128 MB, 256 MB, 512 MB, 1 GB.
+The following record sizes are used: 128 kB, 256 kB, 512 kB.
+The number of threads used are: 1, 2, 4.
