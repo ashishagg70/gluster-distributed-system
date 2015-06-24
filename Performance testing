@@ -1,0 +1,25 @@
+We shall perform the following test on glusterfs:
+1)Initial write and re-write
+2)Read and re-read
+3)Random read and random write
+
+Distributed testing is a strength of the iozone utility, but this requires use of "-+m" option.
+The configuration file passed with "-+m" option contains a series of records that look like this:
+    hostname   directory   iozone-pathname
+
+Where hostname is a host name or IP address of a test driver machine that iozone can use.
+Directory is the pathname of a directory to use within that host.
+Iozone-pathname is the full pathname of the iozone executable to use on that host.
+Be sure that every target host can resolve the hostname of host where the iozone command was run.
+
+The command used is:
+    /opt/iozone/bin/iozone -r 128k -i 0 -i 1 -i 2 -t 4 -s 1G -+m client.cnf -b iozone_test.xls
+
+In the above command:
+-r: Specifies the record size in kB.
+-i: Used to specify which tests to run. (0=write/rewrite, 1=read/re-read, 2=random-read/write).
+-t: Run in throughput mode. Allows the user to specify how many threads or processes to have active during the measurement.
+-s: Specifies the file of the size to test.
+-+m:  Use multiple buffers.
+-b: Used to specify a filename that will be used for output of an Excel compatible file that contains the results.
+
